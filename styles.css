@@ -1,0 +1,416 @@
+@font-face {
+  font-family: "QuicksandBold";
+  src: url('fonts/Quicksand-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OutfitRegular";
+  src: url('fonts/Outfit-Regular.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OutfitMedium";
+  src: url('fonts/Outfit-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "QuicksandSemiBold";
+  src: url('fonts/Quicksand-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --bg-cream: #EEEBD3;
+  --card-white: #FFFFFF;
+  --green-dark: #104911;
+  --green-mid: #548C2F;
+  --green-border: #104911;
+  --yellow-accent: #FFC529;
+  --text-brown: #230C0F;
+  --text-black: #12130F;
+  --font-heading: 'QuicksandBold', sans-serif;
+  --font-body: 'OutfitRegular', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* Main Two-Column Desktop Layout (Works with or without Bootstrap) */
+.product-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 3.5rem 1.5rem;
+}
+
+.product-wrapper > .container {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.product-wrapper .row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4.5rem;
+}
+
+.product-wrapper .row > div:first-child {
+  flex: 0 0 390px;
+  max-width: 390px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-info-col {
+  flex: 1 1 auto;
+  max-width: 460px;
+}
+
+@media (max-width: 860px) {
+  .product-wrapper .row {
+    flex-wrap: wrap;
+    gap: 2.5rem;
+  }
+
+  .product-wrapper .row > div:first-child,
+  .product-info-col {
+    flex: 1 1 100%;
+    max-width: 420px;
+  }
+}
+
+/* Main Large Carousel Card */
+.main-carousel-card {
+  width: 100%;
+  max-width: 390px;
+  height: 430px;
+  background-color: var(--card-white);
+  border-radius: 42px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-item {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-item.active {
+  display: block;
+}
+
+.carousel-img-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+.carousel-img-container img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Carousel Left / Right Arrows Positioned Inside Card */
+.custom-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#prevSlideBtn,
+.carousel-control-prev {
+  left: 8px;
+}
+
+#nextSlideBtn,
+.carousel-control-next {
+  right: 8px;
+}
+
+.custom-carousel-arrow:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Thumbnail Row Below Carousel */
+.thumbnail-row {
+  width: 100%;
+  max-width: 390px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.thumb-card {
+  flex: 1;
+  aspect-ratio: 1 / 1.08;
+  background-color: var(--card-white);
+  border: 2px solid transparent;
+  border-radius: 24px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.thumb-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--green-mid);
+}
+
+.thumb-card.active {
+  border-color: var(--green-dark);
+}
+
+.thumb-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.thumb-card img.thumb-cover {
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* Typography & Product Info */
+.product-title {
+  font-family: "QuicksandBold";
+  font-weight: 600;
+  font-size: 2.35rem;
+  color: var(--green-dark);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.35rem 0;
+}
+
+.product-price {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.65rem;
+  color: var(--text-brown);
+  margin: 0 0 1rem 0;
+}
+
+.product-description {
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--text-black);
+  margin: 0 0 1.4rem 0;
+}
+
+/* Size Chart Pill Button */
+.btn-oura-pill {
+  background-color: var(--green-mid);
+  color: #ffffff;
+  border: 1.5px solid var(--green-border);
+  border-radius: 12px;
+  padding: 8px 20px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-oura-pill:hover {
+  background-color: var(--green-dark);
+}
+
+/* Size Selector Buttons */
+.size-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.size-btn {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  background-color: var(--green-mid);
+  color: #ffffff;
+  border: 1.5px solid var(--green-border);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.18s ease;
+}
+
+.size-btn:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.size-btn.active {
+  background-color: var(--yellow-accent);
+  color: var(--green-dark);
+  border-color: var(--green-border);
+}
+
+/* Out-of-Stock Strikethrough Styling */
+.size-btn.out-of-stock {
+  opacity: 0.92;
+  cursor: not-allowed;
+}
+
+.size-btn.out-of-stock::after {
+  content: "";
+  position: absolute;
+  width: 62%;
+  height: 1.5px;
+  background-color: var(--green-dark);
+  top: 50%;
+  left: 19%;
+  transform: translateY(-50%);
+}
+
+/* Quantity Selector Pill */
+.qty-pill {
+  background-color: var(--green-mid);
+  border: 1.5px solid var(--green-border);
+  border-radius: 999px;
+  width: 150px;
+  height: 44px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.65rem;
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  color: var(--yellow-accent);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+}
+
+.qty-btn:hover {
+  opacity: 0.85;
+}
+
+.qty-display {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  user-select: none;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.btn-basket {
+  background-color: var(--green-mid);
+  color: #ffffff;
+  border: 1.5px solid var(--green-border);
+  border-radius: 999px;
+  padding: 11px 30px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.btn-basket:hover {
+  filter: brightness(1.07);
+}
+
+.btn-get-now {
+  background-color: var(--green-dark);
+  color: var(--yellow-accent);
+  border: 1.5px solid var(--green-dark);
+  border-radius: 999px;
+  padding: 11px 38px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+.btn-get-now:hover {
+  filter: brightness(1.12);
+}
+.basket-feedback {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  min-height: 22px;
+  margin-top: 12px;
+}
